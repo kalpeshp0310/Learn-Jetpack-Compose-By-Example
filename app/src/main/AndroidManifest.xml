@@ -18,6 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="androidx.activity.ComponentActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.example.jetpackcompose.text.SimpleTextActivity"
             android:exported="true"
@@ -134,6 +135,18 @@
             android:name="com.example.jetpackcompose.layout.LayoutModifierActivity"
             android:exported="true"
             android:label="@string/title_layout_modifier_examples"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.example.jetpackcompose.state.ProcessDeathActivity"
+            android:exported="true"
+            android:label="@string/title_process_death_examples"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name="com.example.jetpackcompose.state.livedata.LiveDataActivity"
+            android:exported="true"
+            android:label="@string/title_live_data_example"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

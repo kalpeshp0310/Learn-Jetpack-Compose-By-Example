@@ -3,22 +3,41 @@ package com.example.jetpackcompose.material
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.compose.Composable
+import androidx.compose.getValue
+import androidx.compose.setValue
 import androidx.compose.state
+import androidx.ui.core.Alignment
 import androidx.ui.core.ContextAmbient
-import androidx.ui.core.Text
+import androidx.ui.core.Modifier
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.Image
-import androidx.ui.foundation.SimpleImage
+import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.selection.ToggleableState
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.graphics.imageFromResource
-import androidx.ui.layout.*
-import androidx.ui.material.*
-import androidx.ui.material.ripple.Ripple
+import androidx.ui.layout.Column
+import androidx.ui.layout.Row
+import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
+import androidx.ui.layout.preferredHeight
+import androidx.ui.layout.preferredWidth
+import androidx.ui.layout.wrapContentWidth
+import androidx.ui.material.Card
+import androidx.ui.material.Checkbox
+import androidx.ui.material.CircularProgressIndicator
+import androidx.ui.material.LinearProgressIndicator
+import androidx.ui.material.ListItem
+import androidx.ui.material.MaterialTheme
+import androidx.ui.material.RadioGroup
+import androidx.ui.material.Slider
+import androidx.ui.material.Snackbar
+import androidx.ui.material.Switch
+import androidx.ui.material.TriStateCheckbox
+import androidx.ui.material.ripple.ripple
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.tooling.preview.Preview
@@ -101,7 +120,7 @@ fun MaterialCardComponent() {
     // to access this data. For such scenarios, we use Ambients. In this example, we use the
     // ContextAmbient to get hold of the Context object. In order to get access to the latest
     // value of the Ambient, use the "current" property eg - ContextAmbient.current. Some other
-    // exampels of common Ambient's are TextInputServiceAmbient, DensityAmbient,
+    // examples of common Ambient's are TextInputServiceAmbient, DensityAmbient,
     // CoroutineContextAmbient, etc.
     val resources = ContextAmbient.current.resources
 
@@ -112,7 +131,7 @@ fun MaterialCardComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp)) {
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
         // ListItem is a predefined composable that is a Material Design implementation of [list
         // items](https://material.io/components/lists). This component can be used to achieve the
         // list item templates existing in the spec
@@ -121,10 +140,10 @@ fun MaterialCardComponent() {
         }, secondaryText = {
             Text(text = "Subtitle")
         }, icon = {
-            // Container is a predefined convenience composable that allows you to apply common
-            // layout properties like height, width, padding, constraints, etc.
-            Container(width = 48.dp, height = 48.dp) {
-                Image(image = imageFromResource(resources, R.drawable.lenna))
+            // Box is a predefined convenience composable that allows you to apply common draw & layout
+            // logic. In addition we also pass a few modifiers to it.
+            Box(modifier = Modifier.preferredWidth(48.dp) + Modifier.preferredHeight(48.dp)) {
+                Image(asset = imageFromResource(resources, R.drawable.lenna))
             }
         })
     }
@@ -151,12 +170,12 @@ fun MaterialCheckboxComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp) + LayoutWidth.Fill) {
+    // width using the Modifier.fillMaxWidth() modifier.
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
         // to the Row composable.
-        Row(modifier = LayoutPadding(16.dp)) {
+        Row(modifier = Modifier.padding(16.dp)) {
             // A pre-defined composable that's capable of rendering a checkbox with 2 values - on,
             // & off. It honors the Material Design specification.
             Checkbox(checked = checked,
@@ -165,7 +184,7 @@ fun MaterialCheckboxComponent() {
                 })
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Use Jetpack Compose", modifier = LayoutPadding(start = 8.dp))
+            Text(text = "Use Jetpack Compose", modifier = Modifier.padding(start = 8.dp))
         }
     }
 }
@@ -192,22 +211,22 @@ fun MaterialTriStateCheckboxComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp) + LayoutWidth.Fill) {
+    // width using the Modifier.fillMaxWidth() modifier.
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
         // to the Row composable.
-        Row(modifier = LayoutPadding(16.dp)) {
+        Row(modifier = Modifier.padding(16.dp)) {
             // A pre-defined checkbox composable that's capable of rendering 3 values - on, off &
             // indeterminate. It honors the Material Design specification.
             TriStateCheckbox(
-                value = toggleableStateArray[counter % 3],
+                state = toggleableStateArray[counter % 3],
                 onClick = {
                     counter++
                 })
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Use Jetpack Compose", modifier = LayoutPadding(start = 8.dp))
+            Text(text = "Use Jetpack Compose", modifier = Modifier.padding(start = 8.dp))
         }
 
     }
@@ -236,8 +255,8 @@ fun MaterialRadioButtonGroupComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp) + LayoutWidth.Fill) {
+    // width using the Modifier.fillMaxWidth() modifier.
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // A pre-defined composable that's capable of rendering a radio group. It honors the
         // Material Design specification.
         RadioGroup(options = radioGroupOptions, selectedOption = selected, onSelectedChange = {
@@ -259,12 +278,12 @@ fun MaterialLinearProgressIndicatorComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp) + LayoutWidth.Fill) {
+    // width using the Modifier.fillMaxWidth() modifier.
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
         // to the Row composable.
-        Row(modifier = LayoutPadding(16.dp)) {
+        Row(modifier = Modifier.padding(16.dp)) {
             // A pre-defined composable that's capable of rendering a progress indicator. It honors
             // the Material Design specification. It has fixed width as per Material spec - 240dp
             LinearProgressIndicator()
@@ -285,12 +304,12 @@ fun MaterialDeterminateLinearProgressIndicatorComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp) + LayoutWidth.Fill) {
+    // width using the Modifier.fillMaxWidth() modifier.
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
         // to the Row composable.
-        Row(modifier = LayoutPadding(16.dp)) {
+        Row(modifier = Modifier.padding(16.dp)) {
             // A pre-defined composable that's capable of rendering a progress indicator. It honors
             // the Material Design specification. It has fixed width as per Material spec - 240dp
             LinearProgressIndicator(progress = 0.3f)
@@ -311,11 +330,11 @@ fun MaterialCircularProgressIndicatorComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp) + LayoutWidth.Fill) {
+    // width using the Modifier.fillMaxWidth() modifier.
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
-        CircularProgressIndicator()
+        CircularProgressIndicator(modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
     }
 }
 
@@ -332,11 +351,11 @@ fun MaterialDeterminateCircularProgressIndicatorComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp) + LayoutWidth.Fill) {
+    // width using the Modifier.fillMaxWidth() modifier.
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
         // A pre-defined composable that's capable of rendering a circular progress indicator. It
         // honors the Material Design specification.
-        CircularProgressIndicator(progress = 0.5f)
+        CircularProgressIndicator(progress = 0.5f, modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
     }
 }
 
@@ -353,7 +372,7 @@ fun MaterialSnackbarComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp)) {
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
         // A pre-defined composable that's capable of rendering a Snackbar. It honors the Material
         // Design specification.
         Snackbar(text = {
@@ -361,7 +380,7 @@ fun MaterialSnackbarComponent() {
             // composable to render text on the screen
             Text(text = "I'm a very nice Snackbar")
         }, action = {
-            Text(text = "OK", style = TextStyle(color = MaterialTheme.colors().secondary))
+            Text(text = "OK", style = TextStyle(color = MaterialTheme.colors.secondary))
         })
     }
 
@@ -373,6 +392,15 @@ fun MaterialSnackbarComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialContinousSliderComponent() {
+    // Reacting to state changes is the core behavior of Compose. We use the state composable
+    // that is used for holding a state value in this composable for representing the current
+    // value of the slider. Any composable that reads the value of "sliderValue"
+    // variable will be recomposed any time the value changes. This ensures that only the
+    // composables that depend on this will be redraw while the rest remain unchanged. This ensures
+    // efficiency and is a performance optimization. It is inspired from existing frameworks like
+    // React.
+    var sliderValue by state { 0f }
+
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
     // corners and apply a modifier.
@@ -380,10 +408,12 @@ fun MaterialContinousSliderComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp)) {
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
         // A pre-defined composable that's capable of rendering a slider. It
         // honors the Material Design specification.
-        Slider(position = SliderPosition(0.2f))
+        Slider(value = sliderValue, onValueChange = { newValue ->
+            sliderValue = newValue
+        })
     }
 }
 
@@ -393,6 +423,15 @@ fun MaterialContinousSliderComponent() {
 // built up of smaller composable functions.
 @Composable
 fun MaterialDiscreteSliderComponent() {
+    // Reacting to state changes is the core behavior of Compose. We use the state composable
+    // that is used for holding a state value in this composable for representing the current
+    // value of the slider. Any composable that reads the value of "sliderValue"
+    // variable will be recomposed any time the value changes. This ensures that only the
+    // composables that depend on this will be redraw while the rest remain unchanged. This ensures
+    // efficiency and is a performance optimization. It is inspired from existing frameworks like
+    // React.
+    var sliderValue by state { 0f }
+
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
     // corners and apply a modifier.
@@ -400,10 +439,10 @@ fun MaterialDiscreteSliderComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp)) {
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp)) {
         // A pre-defined composable that's capable of rendering a slider. It honors the Material
         // Design specification. In this example, we create a discrete slider with fixed steps.
-        Slider(position = SliderPosition(initial = 0f, valueRange = 0f..10f, steps = 5))
+        Slider(value = sliderValue, valueRange = 0f..10f, steps = 5, onValueChange = { sliderValue = it })
     }
 }
 
@@ -420,7 +459,7 @@ fun MaterialSwitchComponent() {
     // composables that depend on this will be redraw while the rest remain unchanged. This ensures
     // efficiency and is a performance optimization. It is inspired from existing frameworks like
     // React.
-    var checked by state { false}
+    var checked by state { false }
 
     // Card composable is a predefined composable that is meant to represent the card surface as
     // specified by the Material Design specification. We also configure it to have rounded
@@ -429,14 +468,14 @@ fun MaterialSwitchComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
+    // width using the Modifier.fillMaxWidth() modifier.
     Card(shape = RoundedCornerShape(4.dp),
-        modifier = LayoutPadding(8.dp) + LayoutWidth.Fill,
+        modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth(),
         color = Color(249, 249, 249)) {
         // Row is a composable that places its children in a horizontal sequence. You can think of it
         // similar to a LinearLayout with the horizontal orientation. In addition, we pass a modifier
         // to the Row composable.
-        Row(modifier = LayoutPadding(16.dp)) {
+        Row(modifier = Modifier.padding(16.dp)) {
             // A pre-defined composable that's capable of rendering a switch. It honors the Material
             // Design specification.
             Switch(checked = checked, onCheckedChange = {
@@ -444,7 +483,7 @@ fun MaterialSwitchComponent() {
             })
             // The Text composable is pre-defined by the Compose UI library; you can use this
             // composable to render text on the screen
-            Text(text = "Enable Dark Mode", modifier = LayoutPadding(start = 8.dp))
+            Text(text = "Enable Dark Mode", modifier = Modifier.padding(start = 8.dp))
         }
     }
 }
@@ -462,26 +501,23 @@ fun MaterialRippleComponent() {
     // You can think of Modifiers as implementations of the decorators pattern that are used to
     // modify the composable that its applied to. In the example below, we add a padding of
     // 8dp to the Card composable. In addition, we configure it out occupy the entire available
-    // width using the LayoutWidth.Fill modifier.
-    Card(shape = RoundedCornerShape(4.dp), modifier = LayoutPadding(8.dp) + LayoutWidth.Fill) {
-        // Ripple is a pre-defined composable that creates a pressed state visual indicator when
-        // the child composables that its wrapping are pressed. It adheres to the Material Design
-        // specification.
-        Ripple(bounded = true) {
-            // Clickable wraps the child composable and enables it to react to a click through the
-            // onClick callback similar to the onClick listener that we are accustomed to on Android.
-            Clickable(onClick = {}) {
-                // Box is a predefined convenience composable that allows you to apply common
-                // draw & layout logic.
-                Box(backgroundColor = Color.LightGray, shape = RoundedCornerShape(4.dp)) {
-                    // The Text composable is pre-defined by the Compose UI library; you can use this
-                    // composable to render text on the screen
-                    Text(text = "Click Me", modifier = LayoutPadding(16.dp), style = TextStyle(
-                        fontSize = TextUnit.Companion.Sp(12), fontFamily = FontFamily.Serif
-                    ))
-                }
-
+    // width using the Modifier.fillMaxWidth() modifier.
+    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
+        // Clickable wraps the child composable and enables it to react to a click through the
+        // onClick callback similar to the onClick listener that we are accustomed to on Android.
+        // In order to show a ripple effect, we make use of the Modifier.ripple modifier with the
+        // default values.
+        Clickable(onClick = {}, modifier = Modifier.ripple(bounded = true)) {
+            // Box is a predefined convenience composable that allows you to apply common
+            // draw & layout logic.
+            Box(backgroundColor = Color.LightGray, shape = RoundedCornerShape(4.dp)) {
+                // The Text composable is pre-defined by the Compose UI library; you can use this
+                // composable to render text on the screen
+                Text(text = "Click Me", modifier = Modifier.padding(16.dp), style = TextStyle(
+                    fontSize = TextUnit.Companion.Sp(12), fontFamily = FontFamily.Serif
+                ))
             }
+
         }
     }
 }
