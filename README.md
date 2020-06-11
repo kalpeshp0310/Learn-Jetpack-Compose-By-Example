@@ -1,4 +1,5 @@
-# Learn Jetpack Compose By Example ![Android CI](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/workflows/Android%20CI/badge.svg) ![Compose Version](https://img.shields.io/badge/Compose-0.1.0--dev09-brightgreen)
+# Learn Jetpack Compose By Example 
+![Android CI](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/workflows/Android%20CI/badge.svg) ![Compose Version](https://img.shields.io/badge/Compose-0.1.0--dev12-brightgreen) ![Android Weekly](https://androidweekly.net/issues/issue-414/badge)
 
 ![Feature Image](screenshots/jetpack_compose_poster.png)
 
@@ -19,7 +20,7 @@ Android UI that we are accustomed to building.
 Setup
 -----
 To try out this sample app, you need to at least use the Canary version
-of Android Studio 4.1.
+of Android Studio 4.1, specifically Android Studio 4.1 Canary 9.
 [You can download it here](https://developer.android.com/studio/preview).
 In general, Jetpack Compose requires you to use the Canary version of
 Android Studio.
@@ -57,7 +58,7 @@ sense.
 |[How do I store state information in Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/StateActivity.kt)|<img src ="screenshots/state_example.gif" width=214 height=400> |
 |[How do I retain state across process death & activity recreation(like orientation changes)?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/ProcessDeathActivity.kt) | <img src ="screenshots/process_death.gif" width=214 height=400> |
 |[How do I use LiveData/ViewModels with Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/livedata/LiveDataActivity.kt) | <img src ="screenshots/live_data.gif" width=214 height=400> |
-
+|[How do I use Coroutine Flow to update my components/views with Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/state/coroutine/CoroutineFlowActivity.kt)|<img src ="screenshots/coroutine_flow.gif" width=214 height=400> |
 
 ### Material Design
 
@@ -70,7 +71,8 @@ sense.
 |[How do I add Ripple effect to a view?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/material/MaterialActivity.kt#L495) | <img src ="screenshots/ripple.gif" width=214> |
 |[How do I add a Button to my screen?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/material/ButtonActivity.kt)|<img src ="screenshots/buttons.png" width=214 height=400>|
 |[How do I display an alert dialog/popup modal?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/material/AlertDialogActivity.kt)|<img src ="screenshots/alert_dialog.gif" width=214 height=400>|
-
+|[How do I make Material Filter Chips that overflow to multiple rows?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/material/FlowRowActivity.kt) |<img src ="screenshots/filter_chips.gif" width=214 height=400>|
+|[How do I add a shadow around my view?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/material/ShadowActivity.kt) | <img src ="screenshots/shadow.png" width=214 height=400>|
 
 ### Text
 
@@ -78,6 +80,7 @@ sense.
 |-------|-------|
 |[How do I style & customize my text?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/text/CustomTextActivity.kt)| <img src ="screenshots/text_styles.gif" width=214 height=400> |
 |[How do you take text input from a user in Jetpack Compose?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/text/TextFieldActivity.kt#L78) <br/> [How can I use a custom text style for a text input?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/text/TextFieldActivity.kt#L112) <br/> [How can I change the keyboard type to accept numbers?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/text/TextFieldActivity.kt#L156) <br/> [How can I create a Search bar?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/text/TextFieldActivity.kt#L193) <br/> [How can I apply a visual transformation to an input text?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/text/TextFieldActivity.kt#L246) <br/> [How can I provide a hint for the text input field?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/text/TextFieldActivity.kt#L293)<br/> [Is there filled text field as per Material Design specification?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/text/TextFieldActivity.kt#L293)|<img src ="screenshots/text_input.gif" width=214 height=400> |
+|[How do I animate parts of my text? <br/> How do I describe parts of my text to be replaced by alternate views?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/animation/TextAnimationActivity.kt)|<img src ="screenshots/text_animation.gif" width=214 height=400>|
 
 ### Images
 
@@ -105,8 +108,13 @@ sense.
 |Example|Preview|
 |-------|-------|
 |[How do I draw using a canvas?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/customview/CustomViewActivity.kt)|<img src ="screenshots/custom_view.png" width=214 height=400>|
+|[Example of a measuring scale component](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/customview/MeasuringScaleActivity.kt) | <img src ="screenshots/measuring_scale.gif" width=214 height=400>|
 |[How do I detect touch events in a custom view?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/main/java/com/example/jetpackcompose/customview/CustomViewPainActivity.kt)| |
 
+### Interoperability
+|Example|Preview|
+|-------|-------|
+|[How can I use Jetpack Compose components inside existing screens?](https://github.com/vinaygaba/Learn-Jetpack-Compose-By-Example/blob/master/app/src/androidTest/java/com/example/jetpackcompose/interop/ComposeInLegacyAndroidActivity.kt) | <img src ="screenshots/interop.png" width=214 height=400>|
 
 ### Testing
 |Example|Preview|

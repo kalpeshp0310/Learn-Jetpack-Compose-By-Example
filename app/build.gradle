@@ -33,7 +33,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerVersion "1.3.61-dev-withExperimentalGoogleExtensions-20200129"
+        kotlinCompilerVersion "1.3.70-dev-withExperimentalGoogleExtensions-20200424"
         kotlinCompilerExtensionVersion "${versions.compose}"
 
     }
@@ -54,12 +54,14 @@ dependencies {
 
     // Constraint Layout
     implementation deps.constraintLayout
+    
+    // Coroutine
+    implementation deps.coroutine.core
 
     // Compose
     implementation deps.compose.composeRuntime
     implementation deps.compose.core
     implementation deps.compose.foundation
-    implementation deps.compose.framework
     implementation deps.compose.tooling
     implementation deps.compose.layout
     implementation deps.compose.material

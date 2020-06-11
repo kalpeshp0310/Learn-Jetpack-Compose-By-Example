@@ -1,3 +1,4 @@
+@file:Suppress("UNUSED_PARAMETER")
 package com.example.jetpackcompose.core
 
 import android.content.Intent
@@ -7,12 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.jetpackcompose.R
 import com.example.jetpackcompose.animation.Animation1Activity
 import com.example.jetpackcompose.animation.Animation2Activity
+import com.example.jetpackcompose.animation.TextAnimationActivity
 import com.example.jetpackcompose.customview.CustomViewActivity
 import com.example.jetpackcompose.customview.CustomViewPainActivity
+import com.example.jetpackcompose.customview.MeasuringScaleActivity
+import com.example.jetpackcompose.material.ShadowActivity
 import com.example.jetpackcompose.image.ImageActivity
+import com.example.jetpackcompose.interop.ComposeInLegacyAndroidActivity
 import com.example.jetpackcompose.layout.ConstraintLayoutActivity
 import com.example.jetpackcompose.layout.LayoutModifierActivity
-import com.example.jetpackcompose.scrollers.GridLayoutActivity
 import com.example.jetpackcompose.scrollers.HorizontalScrollableActivity
 import com.example.jetpackcompose.scrollers.VerticalScrollableActivity
 import com.example.jetpackcompose.stack.StackActivity
@@ -26,8 +30,10 @@ import com.example.jetpackcompose.material.BottomNavigationActivity
 import com.example.jetpackcompose.material.ButtonActivity
 import com.example.jetpackcompose.material.DrawerAppActivity
 import com.example.jetpackcompose.material.FixedActionButtonActivity
+import com.example.jetpackcompose.material.FlowRowActivity
 import com.example.jetpackcompose.material.MaterialActivity
 import com.example.jetpackcompose.state.ProcessDeathActivity
+import com.example.jetpackcompose.state.coroutine.CoroutineFlowActivity
 import com.example.jetpackcompose.state.livedata.LiveDataActivity
 import com.example.jetpackcompose.theme.DarkModeActivity
 
@@ -38,103 +44,129 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    fun startSimpleTextExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startSimpleTextExample(view: View) {
         startActivity(Intent(this, SimpleTextActivity::class.java))
     }
 
-    fun startCustomTextExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startCustomTextExample(view: View) {
         startActivity(Intent(this, CustomTextActivity::class.java))
     }
 
-    fun startVerticalScrollableExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startVerticalScrollableExample(view: View) {
         startActivity(Intent(this, VerticalScrollableActivity::class.java))
     }
 
-    fun startHorizontalScrollableExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startHorizontalScrollableExample(view: View) {
         startActivity(Intent(this, HorizontalScrollableActivity::class.java))
     }
 
-    fun starLoadImageExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun starLoadImageExample(view: View) {
         startActivity(Intent(this, ImageActivity::class.java))
     }
 
-    fun startGridExample(@Suppress("UNUSED_PARAMETER")view: View) {
-        startActivity(Intent(this, GridLayoutActivity::class.java))
-    }
+    // The Table API has been removed in dev11 update. Removing this example until there is a 
+    // better alternative available
+//    fun startGridExample(view: View) {
+//        startActivity(Intent(this, GridLayoutActivity::class.java))
+//    }
 
-    fun startAlertDialogExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startAlertDialogExample(view: View) {
         startActivity(Intent(this, AlertDialogActivity::class.java))
     }
 
-    fun startDrawerExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startDrawerExample(view: View) {
         startActivity(Intent(this, DrawerAppActivity::class.java))
     }
 
-    fun startButtonsExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startButtonsExample(view: View) {
         startActivity(Intent(this, ButtonActivity::class.java))
     }
 
-    fun startStateExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startStateExample(view: View) {
         startActivity(Intent(this, StateActivity::class.java))
     }
 
-    fun startCustomViewExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startCustomViewExample(view: View) {
         startActivity(Intent(this, CustomViewActivity::class.java))
     }
 
-    fun startCustomViewPaintExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startCustomViewPaintExample(view: View) {
         startActivity(Intent(this, CustomViewPainActivity::class.java))
     }
 
-    fun startAutofillTextExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startAutofillTextExample(view: View) {
         startActivity(Intent(this, TextFieldActivity::class.java))
     }
 
-    fun startStackExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startStackExample(view: View) {
         startActivity(Intent(this, StackActivity::class.java))
     }
 
-    fun startViewAlignExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startViewAlignExample(view: View) {
         startActivity(Intent(this, ViewLayoutConfigurationsActivity::class.java))
     }
 
-    fun startMaterialDesignExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startMaterialDesignExample(view: View) {
         startActivity(Intent(this, MaterialActivity::class.java))
     }
 
-    fun startFixedActionButtonExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startFixedActionButtonExample(view: View) {
         startActivity(Intent(this, FixedActionButtonActivity::class.java))
     }
 
-    fun startConstraintLayoutExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startConstraintLayoutExample(view: View) {
         startActivity(Intent(this, ConstraintLayoutActivity::class.java))
     }
 
-    fun startBottomNavigationExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startBottomNavigationExample(view: View) {
         startActivity(Intent(this, BottomNavigationActivity::class.java))
     }
 
-    fun startAnimation1Example(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startAnimation1Example(view: View) {
         startActivity(Intent(this, Animation1Activity::class.java))
     }
 
-    fun startAnimation2Example(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startAnimation2Example(view: View) {
         startActivity(Intent(this, Animation2Activity::class.java))
     }
+    
+    fun startTextInlineContentExample(view: View) {
+        startActivity(Intent(this, TextAnimationActivity::class.java))
+    }
 
-    fun startThemeExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startThemeExample(view: View) {
         startActivity(Intent(this, DarkModeActivity::class.java))
     }
 
-    fun startLayoutModifierExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startLayoutModifierExample(view: View) {
         startActivity(Intent(this, LayoutModifierActivity::class.java))
     }
 
-    fun startProcessDeathExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startProcessDeathExample(view: View) {
         startActivity(Intent(this, ProcessDeathActivity::class.java))
     }
 
-    fun startLiveDataExample(@Suppress("UNUSED_PARAMETER")view: View) {
+    fun startLiveDataExample(view: View) {
         startActivity(Intent(this, LiveDataActivity::class.java))
+    }
+
+    fun startFlowRowExample(view: View) {
+        startActivity(Intent(this, FlowRowActivity::class.java))
+    }
+    
+    fun startShadowExample(view: View) {
+        startActivity(Intent(this, ShadowActivity::class.java))
+    }
+
+    fun startCoroutineFlowExample(view: View) {
+        startActivity(Intent(this, CoroutineFlowActivity::class.java))
+    }
+    
+    fun startComposeLegacyExample(view: View) {
+        startActivity(Intent(this, ComposeInLegacyAndroidActivity::class.java))
+    }
+    
+    fun startMeasuringScaleExample(view: View) {
+        startActivity(Intent(this, MeasuringScaleActivity::class.java))
     }
 }

@@ -14,12 +14,11 @@ import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
 import androidx.ui.foundation.ContentGravity
 import androidx.ui.graphics.Color
-import androidx.ui.graphics.Paint
+import androidx.ui.graphics.drawscope.rotate
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.preferredSize
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
-import androidx.ui.unit.toRect
 
 class Animation1Activity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +60,7 @@ private val rotationTransitionDefinition = transitionDefinition {
     // Here we define the transition spec i.e what action do we need to do as we transition from
     // one state to another. Below, we define a TransitionSpec for the transition
     // state A -> state B.
-    transition("A" to "B") {
+    transition(fromState = "A", toState =  "B") {
         // For the transition from state A -> state B, we assign a AnimationBuilder to the
         // rotation prop where we specify how we want to update the value of the rotation prop
         // between state A & B, what the duration of this animation should be, what kind of
@@ -110,10 +109,6 @@ fun RotatingSquareComponent() {
             // to modify the composable that its applied to. In this example, we assign a size
             // of 200dp to the Canvas using Modifier.preferredSize(200.dp).
             Canvas(modifier = Modifier.preferredSize(200.dp)) {
-                save()
-                // Translate the canvas to the center of the screen so that we can rotate at the
-                // correct pivot point.
-                translate(size.width.value/2, size.height.value/2)
                 // As the Transition is changing the interpolating the value of your props based
                 // on the "from state" and the "to state", you get access to all the values
                 // including the intermediate values as they are being updated. We can use the
@@ -121,12 +116,9 @@ fun RotatingSquareComponent() {
                 // composables/layouts. Below, we use state[rotation] to get the latest value of
                 // rotation (it will be a value between 0 & 360 depending on where it is in the
                 // transition) and use it to rotate our canvas.
-                rotate(state[rotation])
-                // translate the same distance back as we are done rotating the canvas
-                translate(-size.width.value/2, -size.height.value/2)
-                // draw the rectangle on the screen.
-                drawRect(size.toRect(), Paint().apply { color = Color(255, 138, 128) })
-                restore()
+                rotate(state[rotation]) {
+                    drawRect(color = Color(255, 138, 128))
+                }
             }
         }
     })
